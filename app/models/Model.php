@@ -3,7 +3,7 @@
 abstract class Model {
 
     private $db;
-    protected $model;
+    private $model;
 
     public function __construct()
     {
@@ -25,22 +25,6 @@ abstract class Model {
         $this->db->query($sql);
 
         return $this->db->resultSet();
-    }
-
-    public function create($attr)
-    {
-        $var = "";
-        $val = "";
-
-        foreach ($attr as $key => $value) {
-            $var = $var.$key.", ";
-//            $val = $val.":".$key.", ";
-            $val = $val.$value.", ";
-        }
-
-        $sql = "INSERT INTO ".$this->model." ( ".$var." ) VALUES ( ".$val." ) ";
-
-        return $sql;
     }
 
 }

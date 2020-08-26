@@ -11,19 +11,7 @@ class AuthController extends BaseController {
 
     public function login()
     {
-//        $data = $this->user->getAll();
-
-        $data = [
-            'username'=>"ViNguyen",
-            'password'=>"123456"
-        ];
-
-        $result = $this->user->create($data);
-
-        var_dump($result);
-        die();
-
-        $this->view('auth/login',$data);
+        $this->view('auth/login');
     }
 
     public function register()
