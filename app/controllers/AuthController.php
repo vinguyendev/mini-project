@@ -3,6 +3,7 @@
 class AuthController extends BaseController {
 
     private $user;
+    public $error;
 
     public function __construct()
     {
@@ -17,6 +18,22 @@ class AuthController extends BaseController {
     public function register()
     {
         $this->view('auth/register');
+    }
+
+    public function checkLogin()
+    {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $remember = $_POST['remember'];
+//        $_SESSION['checkLogin'] = "";
+//        header('Location: /auth/login');
+//        if (empty($username) || empty($password)) {
+//            $_SESSION['checkLogin'] = "loginFail";
+//             header('Location: /auth/login');
+//        }
+//        else {
+//            header("Location: /book");
+//        }
     }
 
 }

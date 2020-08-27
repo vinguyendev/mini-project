@@ -2,26 +2,72 @@
     include 'app/views/layout/header.php'
 ?>
 
+<?php
+    if(session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+    $checkLogin = $_SESSION['checkLogin'];
+?>
+
 <div class="main-container">
-    <div class="container">
-        <form>
+    <div class="contain-form">
+        <span class="title-page">Đăng nhập</span>
+        <form action="/auth/checkLogin" method="post" onsubmit="return validate()" >
+
+            <?php
+            if ($checkLogin=='loginFail') {
+                ?>
+                <span class="error">* Tên tài khoản hoặc mật khẩu không đúng</span>
+                <?php
+            }
+            ?>
             <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                <label for="username">Tên tài khoản</label>
+                <input
+                        type="text"
+                        class="form-control"
+                        name="username"
+                        id="username"
+                        value="vinguyen"
+                        placeholder="Enter Username"
+                >
+                <span id="check-username" class="error"></span>
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
+                <label for="password">Mật khẩu</label>
+                <input
+                        type="password"
+                        class="form-control"
+                        id="password"
+                        name="password"
+                        value="Videv@123"
+                        placeholder="Enter Password"
+                >
+                <span id="check-password" class="error"></span>
             </div>
-            <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            <div class="form-group form-check remember-password row">
+                <div class="col-md-8">
+                    <input type="checkbox" class="form-check-input" id="remember" name="remember">
+                    <label class="form-check-label" for="remember">Nhớ mật khẩu</label>
+                </div>
+                <div class="col-md-4 ">
+                    <a href="/auth/register">Đăng ký</a>
+                </div>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Đăng nhập</button>
         </form>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="../public/js/app.js"></script>
+<script>
+    function validate() {
+        let username = $('#username').val();
+        let password = $('#password').val();
+        let remember = $('#remember').val();
+        return validateUsername(username) && validatePassword(password);
+    }
+</script>
 
 <?php
     include 'app/views/layout/footer.php'
