@@ -7,7 +7,7 @@ include 'app/views/layout/nav-menu.php';
     <span class="title">Thêm sách mới</span>
     <br>
     <div class="contain-create-book">
-        <form action="/book/store" method="post">
+        <form action="/book/store" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="name">Tên sách</label>
                 <input type="text"
@@ -52,13 +52,14 @@ include 'app/views/layout/nav-menu.php';
                 </select>
             </div>
 
-            <div class="form-group">
-                <label>Hình ảnh</label>
-                <div class="custom-file">
-                    <input type="file" name="image" class="custom-file-input">
-                    <label class="custom-file-label">Choose file...</label>
-                </div>
-            </div>
+<!--            <div class="form-group">-->
+<!--                <label>Hình ảnh</label>-->
+<!--                <div class="custom-file">-->
+<!--                    <input type="file" name="image">-->
+<!--                    <label class="custom-file-label">Choose file...</label>-->
+<!--                </div>-->
+<!--            </div>-->
+            <input type="file" name="image">
             <br><br>
             <div class="form-group contain-btn">
                 <button type="submit" class="btn btn-primary">Thêm mới</button>
