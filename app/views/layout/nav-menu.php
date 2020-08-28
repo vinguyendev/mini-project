@@ -5,7 +5,7 @@
         </a>
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="#">Đăng xuất</a>
+            <a class="dropdown-item" href="/auth/logout">Đăng xuất</a>
         </div>
     </div>
 </div>

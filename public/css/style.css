@@ -65,6 +65,11 @@
     margin: auto;
 }
 
+.contain-create-book  {
+    width: 800px;
+    margin: auto;
+}
+
 .table-book {
     width: 100%;
 }
@@ -82,6 +87,11 @@
     margin: 20px 0;
 }
 
+.btn-add a{
+    color: #ffffff;
+    text-decoration: none;
+}
+
 .image-col img {
     width: 80px;
     height: 120px;
@@ -89,4 +99,10 @@
 
 .table td {
     vertical-align: middle;
+}
+
+.contain-btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }

@@ -38,4 +38,10 @@ class AuthController extends BaseController {
 
     }
 
+    public function logout()
+    {
+        session_destroy();
+        header('Location: /auth/login');
+    }
+
 }

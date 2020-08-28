@@ -6,7 +6,9 @@ include 'app/views/layout/nav-menu.php';
 <div class="container">
     <span class="title">Quản lý sách</span>
     <div class="contain-book">
-        <button type="button" class="btn btn-success btn-add">Thêm sách mới</button>
+        <button type="button" class="btn btn-success btn-add">
+            <a href="/book/create">Thêm sách mới</a>
+        </button>
         <table class="table table-striped table-book">
             <thead>
             <tr>
