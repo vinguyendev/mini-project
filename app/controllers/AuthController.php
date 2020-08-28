@@ -25,15 +25,17 @@ class AuthController extends BaseController {
         $username = $_POST['username'];
         $password = $_POST['password'];
         $remember = $_POST['remember'];
-//        $_SESSION['checkLogin'] = "";
-//        header('Location: /auth/login');
-//        if (empty($username) || empty($password)) {
-//            $_SESSION['checkLogin'] = "loginFail";
-//             header('Location: /auth/login');
-//        }
-//        else {
-//            header("Location: /book");
-//        }
+
+        $result = $this->user->checkLogin($username, $password);
+
+        if ($result) {
+            $_SESSION['checkLogin'] = "";
+            header("Location: /book");
+        } else {
+            $_SESSION['checkLogin'] = "loginFail";
+            header('Location: /auth/login');
+        }
+
     }
 
 }

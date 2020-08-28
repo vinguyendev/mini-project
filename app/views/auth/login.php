@@ -6,7 +6,7 @@
     if(session_status() == PHP_SESSION_NONE) {
         session_start();
     }
-    $checkLogin = $_SESSION['checkLogin'];
+    $checkLogin = !empty($_SESSION['checkLogin'])?$_SESSION['checkLogin']:'';
 ?>
 
 <div class="main-container">
