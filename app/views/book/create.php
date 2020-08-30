@@ -1,6 +1,18 @@
 <?php
+/**
+ * @var array $data
+ */
+?>
+
+<?php
 include 'app/views/layout/header.php';
 include 'app/views/layout/nav-menu.php';
+?>
+
+<?php
+
+$categories = $data['categories'];
+
 ?>
 
 <div class="container">
@@ -46,19 +58,16 @@ include 'app/views/layout/nav-menu.php';
                         id="category"
                 >
                     <option value="0">Chọn thể loại</option>
-                    <option value="1" selected>Phát triển bản thân</option>
-                    <option value="2">Khoa học công nghệ</option>
-                    <option value="3">Quản trị kinh doanh</option>
+                    <?php
+                        foreach ($categories as $category) {
+                            ?>
+                            <option value="<?php echo $category->id?>"><?php echo $category->name?></option>
+                            <?php
+                        }
+                    ?>
                 </select>
             </div>
 
-<!--            <div class="form-group">-->
-<!--                <label>Hình ảnh</label>-->
-<!--                <div class="custom-file">-->
-<!--                    <input type="file" name="image">-->
-<!--                    <label class="custom-file-label">Choose file...</label>-->
-<!--                </div>-->
-<!--            </div>-->
             <input type="file" name="image">
             <br><br>
             <div class="form-group contain-btn">

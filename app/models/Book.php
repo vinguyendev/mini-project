@@ -40,13 +40,14 @@ class Book extends Model {
 
     public function update($data, $id)
     {
-        $this->db->query("UPDATE books SET name = :name, content = :content, author = :author, image = :image, category_id = :category_id WHERE id=:id");
+        $this->db->query("UPDATE books SET name = :name, content = :content, author = :author, image = :image, category_id = :category_id, updated_at = :updated_at WHERE id=:id");
 
         $this->db->bind("name",$data["name"]);
         $this->db->bind("content",$data["content"]);
         $this->db->bind("author",$data["author"]);
         $this->db->bind("image",$data["image"]);
         $this->db->bind("category_id",$data["category_id"]);
+        $this->db->bind("updated_at",$data["updated_at"]);
         $this->db->bind("id",$id);
 
         if ($this->db->execute()) {

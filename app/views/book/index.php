@@ -52,7 +52,9 @@ include 'app/views/layout/nav-menu.php';
                                 Xem
                             </button>
                         </a>
-                        <button type="button" class="btn btn-outline-secondary">Sửa</button>
+                        <a href="/book/edit/<?php echo $book->id?>">
+                            <button type="button" class="btn btn-outline-secondary">Sửa</button>
+                        </a>
                         <button type="button"
                                 class="btn btn-outline-danger btnDelete"
                                 onclick="onDelete(<?php echo $book->id?>,'<?php echo $book->name?>')"

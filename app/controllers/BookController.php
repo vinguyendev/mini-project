@@ -1,15 +1,18 @@
 <?php
 
 include_once 'app/helpers/slug.php';
+include_once 'app/models/Category.php';
 
 
 class BookController extends BaseController {
 
     private $book;
+    private $categories;
 
     public function __construct()
     {
         $this->book = $this->model('Book');
+        $this->categories = new Category();
     }
 
     public function index()
@@ -21,12 +24,54 @@ class BookController extends BaseController {
 
     public function create()
     {
-        $this->view('book/create');
+        $categories = $this->categories->getAll();
+
+        $data = [
+            'categories'=>$categories
+        ];
+
+        $this->view('book/create',$data);
     }
 
-    public function edit($book_id)
+    public function edit($id)
     {
-        $this->view('book/edit');
+        $book = $this->book->findById($id);
+        $categories = $this->categories->getAll();
+        $data = [
+            'book'=>$book,
+            'categories'=>$categories
+        ];
+
+        $this->view('book/edit', $data);
+    }
+
+    public function update($id)
+    {
+
+        $name = $_POST['name'];
+        $author = $_POST['author'];
+        $content = $_POST['content'];
+        $category = $_POST['category'];
+        $image = changeToSlug($name).'.png';
+
+        $data = [
+            'name'=>trim($name),
+            'author'=>trim($author),
+            'content'=>trim($content),
+            'category_id'=>$category,
+            'image'=>$image,
+            'updated_at'=>date('y-m-d h:i:s',time())
+        ];
+
+        $result = $this->book->update($data, $id);
+        if ($result) {
+            echo '<script language="javascript">alert("Cập nhật sách thành công!");</script>';
+        } else {
+            echo '<script language="javascript">alert("Cập nhật sách không thành công!");</script>';
+        }
+
+        header("Location: /book");
+
     }
 
     public function store()
