@@ -28,6 +28,9 @@ include 'app/views/layout/nav-menu.php';
             <p class="book-content">
                 Giới thiệu: <?php echo $data->content?>
             </p>
+            <button type="button" class="btn btn-primary btn-add">
+                <a href="/book">Quay lại trang chủ</a>
+            </button>
         </div>
     </div>
 </div>
