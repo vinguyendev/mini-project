@@ -76,4 +76,18 @@ class BookController extends BaseController {
         $this->view('book/show',$data);
     }
 
+
+    public function delete($id)
+    {
+        $result = $this->book->delete($id);
+
+        if ($result) {
+            echo '<script language="javascript">alert("Đã xóa sách thành công!");</script>';
+        }
+        else {
+            echo '<script language="javascript">alert("Có lỗi xảy ra!");</script>';
+        }
+        header("Location: /book");
+    }
+
 }

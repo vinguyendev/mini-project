@@ -42,3 +42,13 @@ function validatePassword(password) {
     $('#check-password').html(text);
     return check;
 }
+
+function onDelete(id,name) {
+    $("#name-book").html(name);
+    $(".btn-confirm").data("id",id);
+}
+
+function confirmDelete() {
+    let id = $(".btn-confirm").data('id');
+    location.href = "/book/delete/"+id;
+}
