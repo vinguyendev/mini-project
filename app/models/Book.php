@@ -57,7 +57,10 @@ class Book extends Model {
 
     public function findById($id)
     {
+        $this->db->query("SELECT * FROM books WHERE id = :id");
+        $this->db->bind("id",$id);
 
+        return $this->db->single();
     }
 
 }

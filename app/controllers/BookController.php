@@ -14,9 +14,9 @@ class BookController extends BaseController {
 
     public function index()
     {
-//        $data = $this->book->getBooks();
+        $data = $this->book->getAll();
 
-        $this->view('book/index');
+        $this->view('book/index', $data);
     }
 
     public function create()
@@ -65,6 +65,15 @@ class BookController extends BaseController {
             echo '<script language="javascript">alert("Upload thất bại!");</script>';
         }
 
+        header("Location: /book");
+
+    }
+
+    public function show($id)
+    {
+        $data = $this->book->findById($id);
+
+        $this->view('book/show',$data);
     }
 
 }

@@ -1,4 +1,10 @@
 <?php
+/**
+ * @var array $data
+ */
+?>
+
+<?php
 include 'app/views/layout/header.php';
 include 'app/views/layout/nav-menu.php';
 ?>
@@ -21,48 +27,31 @@ include 'app/views/layout/nav-menu.php';
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mỗi ngày dôi thêm một giờ</td>
-                <td class="image-col">
-                    <img src="https://static-shop.waka.vn/resize/340x497x1/image/img.product/0/0/0/12/6462_1.jpg" alt="">
-                </td>
-                <td>Lâm Tiểu Bạch</td>
-                <td>Ngôn tình</td>
-                <td style="text-align: center">
-                    <button type="button" class="btn btn-outline-info">Xem</button>
-                    <button type="button" class="btn btn-outline-secondary">Sửa</button>
-                    <button type="button" class="btn btn-outline-danger">Xóa</button>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Mỗi ngày dôi thêm một giờ</td>
-                <td class="image-col">
-                    <img src="https://static-shop.waka.vn/resize/340x497x1/image/img.product/0/0/0/12/6462_1.jpg" alt="">
-                </td>
-                <td>Lâm Tiểu Bạch</td>
-                <td>Ngôn tình</td>
-                <td style="text-align: center">
-                    <button type="button" class="btn btn-outline-info">Xem</button>
-                    <button type="button" class="btn btn-outline-secondary">Sửa</button>
-                    <button type="button" class="btn btn-outline-danger">Xóa</button>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Mỗi ngày dôi thêm một giờ</td>
-                <td class="image-col">
-                    <img src="https://static-shop.waka.vn/resize/340x497x1/image/img.product/0/0/0/12/6462_1.jpg" alt="">
-                </td>
-                <td>Lâm Tiểu Bạch</td>
-                <td>Ngôn tình</td>
-                <td style="text-align: center">
-                    <button type="button" class="btn btn-outline-info">Xem</button>
-                    <button type="button" class="btn btn-outline-secondary">Sửa</button>
-                    <button type="button" class="btn btn-outline-danger">Xóa</button>
-                </td>
-            </tr>
+            <?php
+
+            foreach ($data as $index => $book) {
+                ?>
+
+                <tr>
+                    <th scope="row"><?php echo $index + 1?></th>
+                    <td><?php echo $book->name?></td>
+                    <td class="image-col">
+                        <img src="public/images/<?php echo $book->image?>" alt="">
+                    </td>
+                    <td><?php echo $book->author?></td>
+                    <td>Ngôn tình</td>
+                    <td style="text-align: center">
+                        <button type="button" class="btn btn-outline-info btn-action">
+                            <a href="/book/show/<?php echo $book->id?>">Xem</a>
+                        </button>
+                        <button type="button" class="btn btn-outline-secondary">Sửa</button>
+                        <button type="button" class="btn btn-outline-danger">Xóa</button>
+                    </td>
+                </tr>
+
+                <?php
+            }
+            ?>
             </tbody>
         </table>
     </div>

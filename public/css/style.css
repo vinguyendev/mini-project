@@ -101,8 +101,60 @@
     vertical-align: middle;
 }
 
+.table th {
+    vertical-align: middle;
+}
+
 .contain-btn {
     width: 100%;
     display: flex;
     justify-content: center;
+}
+
+.btn-action a {
+    color: #17a2b8;
+    text-decoration: none;
+}
+
+.btn-action a:hover {
+    color: #ffffff;
+}
+
+.contain-detail {
+    display: flex;
+    flex-direction: row;
+}
+
+.detail-left {
+    width: 350px;
+    display: flex;
+    justify-content: center;
+    margin-right: 30px;
+}
+
+.detail-left img {
+    width: 300px;
+    height: auto;
+}
+
+.detail-right {
+    padding: 25px;
+}
+
+.book-name {
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.book-author {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.book-category {
+    font-size: 20px;
+}
+
+.book-content {
+    font-size: 20px;
 }
