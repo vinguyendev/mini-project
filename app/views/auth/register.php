@@ -5,7 +5,7 @@ include 'app/views/layout/header.php'
     <div class="main-container">
         <div class="contain-form">
             <span class="title-page">Đăng ký</span>
-            <form action="" method="post">
+            <form action="/auth/store" method="post">
                 <div class="form-group">
                     <label for="username">Tên tài khoản</label>
                     <input

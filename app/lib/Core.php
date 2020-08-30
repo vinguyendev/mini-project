@@ -15,11 +15,11 @@ class Core {
             header("Location: /book");
         }
 
-//        if ($url[0] != 'auth' && $url[0] !='login' ) {
-//            include 'app/lib/Session.php';
-//            $session = new Session();
-//            $session->isLogin();
-//        }
+        if ($url[0] != 'auth' && $url[0] !='login' ) {
+            include 'app/lib/Session.php';
+            $session = new Session();
+            $session->isLogin();
+        }
 
         if (file_exists('app/controllers/' . ucwords($url[0]) . 'Controller.php')) {
             $this->controller = ucwords( $url[0] );

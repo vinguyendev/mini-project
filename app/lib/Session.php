@@ -37,7 +37,7 @@ class Session {
         $username = self::get("username");
 
         if (!$username==false) {
-            $sql = "SELECT * FROM user WHERE username = :username";
+            $sql = "SELECT * FROM users WHERE username = :username";
 
             $db = new Database();
 

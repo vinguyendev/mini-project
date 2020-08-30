@@ -25,4 +25,21 @@ class User extends Model {
         }
         return false;
     }
+
+    public function insert($data)
+    {
+        $this->db->query("INSERT INTO users(username,password,remember_token,created_at, updated_at)
+                            VALUES (:username, :password, :remember_token, :created_at, :updated_at)");
+
+        $this->db->bind(":username",$data["username"]);
+        $this->db->bind(":password",$data["password"]);
+        $this->db->bind(":remember_token",$data["remember_token"]);
+        $this->db->bind(":created_at",$data["created_at"]);
+        $this->db->bind(":updated_at",$data["updated_at"]);
+        if ($this->db->execute()) {
+            return true;
+        }
+        return false;
+    }
+
 }
