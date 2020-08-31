@@ -46,9 +46,7 @@ $categories = $data['categories'];
                           class="form-control"
                           name="content"
                           placeholder="Nhập mô tả về sách"
-                >
-                    <?php echo $book->content?>
-                </textarea>
+                ><?php echo $book->content?></textarea>
             </div>
 
             <div class="form-group">

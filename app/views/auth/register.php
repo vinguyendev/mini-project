@@ -1,15 +1,31 @@
 <?php
+/**
+ * @var array $data
+ */
+?>
+<?php
 include 'app/views/layout/header.php'
 ?>
 
 <?php
 
-if(session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-$error = !empty($_SESSION['error'])?$_SESSION['error']:'';
+    $text_error = "";
+    $error = !empty($data['error'])?$data['error']:'';
+    if ($error == "fail") {
+        $text_error = "Tên tài khoản đã tồn tại";
+    }
+    if ($error == "username") {
+        $text_error = "Username không đúng định dạng";
+    }
+    if ($error == "password") {
+        $text_error = "Mật khẩu không đúng định dạng";
+    }
+    if ($error === "re_password") {
+        $text_error = "Mật khẩu không đúng định dạng";
+    }
 
-?>
+    $success = !empty($data['success'])?$data['success']:'';
+
 ?>
 
 <div class="main-container">
@@ -20,12 +36,20 @@ $error = !empty($_SESSION['error'])?$_SESSION['error']:'';
               onsubmit="return validate()"
         >
             <?php
-            if ($error=='usernameError') {
+            if (!empty($text_error)) {
                 ?>
-                <span class="error">* Tên tài khoản đã tồn tại</span>
+                <span class="alert-warning">* <?php echo $text_error?></span>
                 <?php
             }
             ?>
+            <?php
+            if (!empty($success)) {
+                ?>
+                <span class="alert-success">Đăng ký thành công</span>
+                <?php
+            }
+            ?>
+            <br>
 
             <div class="form-group">
                 <label for="username">Tên tài khoản</label>
@@ -63,14 +87,8 @@ $error = !empty($_SESSION['error'])?$_SESSION['error']:'';
                 >
                 <span id="re-check-password" class="error"></span>
             </div>
-            <div class="form-group form-check remember-password row">
-                <div class="col-md-8">
-                    <input type="checkbox" class="form-check-input" id="remember" name="remember">
-                    <label class="form-check-label" for="remember">Nhớ mật khẩu</label>
-                </div>
-                <div class="col-md-4 ">
-                    <a href="/auth/login">Đăng nhập</a>
-                </div>
+            <div class="col-md-4 ">
+                <a href="/auth/login">Đăng nhập</a>
             </div>
             <button type="submit" class="btn btn-primary">Đăng ký</button>
         </form>

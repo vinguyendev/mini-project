@@ -29,37 +29,62 @@ class AuthController extends BaseController {
 
     public function login()
     {
-        $this->view('auth/login');
+        $error = '';
+        if (isset($_GET['error'])) {
+            $error = $_GET['error'];
+        }
+        $data = [
+            'error'=>$error
+        ];
+
+        $this->view('auth/login', $data);
     }
 
     public function register()
     {
-        $this->view('auth/register');
+        $error = '';
+        if (isset($_GET['error'])) {
+            $error = $_GET['error'];
+        }
+        $success = '';
+        if (isset($_GET['success'])) {
+            $success = $_GET['success'];
+        }
+        $data = [
+            'error'=>$error,
+            'success'=>$success
+        ];
+
+        $this->view('auth/register',$data);
     }
 
     public function checkLogin()
     {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        $remember = $_POST['remember'];
+        $username = isset($_POST['username'])?$_POST['username']:"";
+        $password = isset($_POST['password'])?$_POST['password']:"";
+        $remember = isset($_POST['remember'])?$_POST['remember']:"";
         $password = md5($password);
 
         $result = $this->user->checkLogin($username, $password);
         $section = new Session();
 
-        if ($result) {
+        if (!is_string($username) || !ctype_alnum($username) || strlen($username<6) || !ctype_alpha($username[0])) {
+            header('Location: /auth/login&error=username');
+        }
 
+        if (!is_string($password || !ctype_alnum($password) || strlen($password < 6))) {
+            header('Location: /auth/login&error=password');
+        }
+
+        if ($result) {
             if ($remember) {
                 setcookie('remember_token',$password, time()+3600*24*30);
                 setcookie('username',$username,time()+3600*24*30);
             }
-
             $section->set("username",$username);
-            $section->set("checkLogin","");
             header("Location: /book");
         } else {
-            $section->set("checkLogin","loginFail");
-            header('Location: /auth/login');
+            header('Location: /auth/login&error=fail');
         }
 
     }
@@ -74,43 +99,41 @@ class AuthController extends BaseController {
 
     public function store()
     {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        $remember = $_POST['remember'];
+        $username = isset($_POST['username'])?$_POST['username']:"";
+        $password = isset($_POST['password'])?$_POST['password']:"";
+        $re_password = isset($_POST['$re_password'])?$_POST['$re_password']:"";
 
-        $section = new Session();
+        if (!is_string($username) || !ctype_alnum($username) || strlen($username<6) || !ctype_alpha($username[0])) {
+            header('Location: /auth/register&error=username');
+        }
+
+        if (!is_string($password || !ctype_alnum($password) || strlen($password < 6))) {
+            header('Location: /auth/register&error=password');
+        }
+
+        if ($re_password !== $password) {
+            header('Location: /auth/register&error=re_password');
+        }
 
         $checkUsername = $this->user->checkUsername($username);
         if ($checkUsername) {
-            $section->set("error","usernameError");
-            header('Location: /auth/register');
+            header('Location: /auth/register&error=fail');
         }
         else {
-            $section->set("error","");
             $data = [
                 'username'=>trim($username),
                 'password'=>md5(trim($password)),
-                'remember_token'=>$remember,
+                'remember_token'=>md5(trim($password)),
                 'created_at'=>date('y-m-d h:i:s',time()),
                 'updated_at'=>date('y-m-d h:i:s',time())
             ];
 
-
             $result = $this->user->insert($data);
 
             if ($result) {
-
-                if ($remember) {
-                    setcookie('remember_token',$password, time()+3600*24*30);
-                    setcookie('username',$username,time()+3600*24*30);
-                }
-
-                $section->set("username",$username);
-                $section->set("checkLogin","");
-                header("Location: /book");
+                header("Location: /auth/register&success=1");
             } else {
-                $section->set("checkLogin","loginFail");
-                header('Location: /auth/login');
+                header('Location: /auth/register');
             }
         }
 

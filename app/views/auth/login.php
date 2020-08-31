@@ -1,26 +1,42 @@
 <?php
+/**
+ * @var array $data
+ */
+?>
+
+<?php
     include 'app/views/layout/header.php'
 ?>
 
 <?php
-    if(session_status() == PHP_SESSION_NONE) {
-        session_start();
+    $text_error = "";
+    $error = $data['error'];
+    if ($error == "fail") {
+        $text_error = "Tên tài khoản hoặc mật khẩu không đúng";
     }
-    $checkLogin = !empty($_SESSION['checkLogin'])?$_SESSION['checkLogin']:'';
+    if ($error == "username") {
+        $text_error = "Username không đúng định dạng";
+    }
+    if ($error == "password") {
+        $text_error = "Mật khẩu không đúng định dạng";
+    }
+
 ?>
 
 <div class="main-container">
     <div class="contain-form">
         <span class="title-page">Đăng nhập</span>
         <form action="/auth/checkLogin" method="post" onsubmit="return validate()" >
-
             <?php
-            if ($checkLogin=='loginFail') {
+            if (!empty($text_error)) {
                 ?>
-                <span class="error">* Tên tài khoản hoặc mật khẩu không đúng</span>
+                <span class="alert-warning">* <?php echo $text_error?></span>
                 <?php
             }
             ?>
+
+            <br>
+
             <div class="form-group">
                 <label for="username">Tên tài khoản</label>
                 <input
