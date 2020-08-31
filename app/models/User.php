@@ -42,4 +42,19 @@ class User extends Model {
         return false;
     }
 
+    public function checkUsername($username)
+    {
+        $sql = "SELECT * FROM users WHERE username = :username";
+
+        $this->db->query($sql);
+        $this->db->bind(":username",$username);
+        $this->db->execute();
+
+        if ($this->db->rowCount() > 0) {
+            return true;
+        }
+        return false;
+
+    }
+
 }

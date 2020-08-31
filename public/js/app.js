@@ -2,7 +2,7 @@ function validateUsername(username) {
     let check = true;
     let illegalChars = /\W/;
     let text = "";
-    if (username.length < 6 || username.length > 20) {
+    if (username.length < 6) {
         check = false;
         text = "Tên tài khoản phải nhiều hơn 6 ký tự"
     }

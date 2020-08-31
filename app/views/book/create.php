@@ -19,7 +19,11 @@ $categories = $data['categories'];
     <span class="title">Thêm sách mới</span>
     <br>
     <div class="contain-create-book">
-        <form action="/book/store" method="post" enctype="multipart/form-data">
+        <form action="/book/store"
+              method="post"
+              enctype="multipart/form-data"
+
+        >
             <div class="form-group">
                 <label for="name">Tên sách</label>
                 <input type="text"

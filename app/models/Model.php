@@ -20,7 +20,7 @@ abstract class Model {
 
     public function getAll()
     {
-        $sql = "SELECT * FROM ".$this->model;
+        $sql = "SELECT * FROM ".$this->model." ORDER BY created_at DESC";
 
         $this->db->query($sql);
 

@@ -78,31 +78,42 @@ class AuthController extends BaseController {
         $password = $_POST['password'];
         $remember = $_POST['remember'];
 
-        $data = [
-            'username'=>trim($username),
-            'password'=>md5(trim($password)),
-            'remember_token'=>$remember,
-            'created_at'=>date('y-m-d h:i:s',time()),
-            'updated_at'=>date('y-m-d h:i:s',time())
-        ];
         $section = new Session();
 
-        $result = $this->user->insert($data);
-
-        if ($result) {
-
-            if ($remember) {
-                setcookie('remember_token',$password, time()+3600*24*30);
-                setcookie('username',$username,time()+3600*24*30);
-            }
-
-            $section->set("username",$username);
-            $section->set("checkLogin","");
-            header("Location: /book");
-        } else {
-            $section->set("checkLogin","loginFail");
-            header('Location: /auth/login');
+        $checkUsername = $this->user->checkUsername($username);
+        if ($checkUsername) {
+            $section->set("error","usernameError");
+            header('Location: /auth/register');
         }
+        else {
+            $section->set("error","");
+            $data = [
+                'username'=>trim($username),
+                'password'=>md5(trim($password)),
+                'remember_token'=>$remember,
+                'created_at'=>date('y-m-d h:i:s',time()),
+                'updated_at'=>date('y-m-d h:i:s',time())
+            ];
+
+
+            $result = $this->user->insert($data);
+
+            if ($result) {
+
+                if ($remember) {
+                    setcookie('remember_token',$password, time()+3600*24*30);
+                    setcookie('username',$username,time()+3600*24*30);
+                }
+
+                $section->set("username",$username);
+                $section->set("checkLogin","");
+                header("Location: /book");
+            } else {
+                $section->set("checkLogin","loginFail");
+                header('Location: /auth/login');
+            }
+        }
+
     }
 
 }
