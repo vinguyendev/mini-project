@@ -23,7 +23,7 @@ include 'app/views/layout/nav-menu.php';
                 Tác giả: <?php echo $data->author?>
             </p>
             <p class="book-category">
-                Thể loại: <?php echo $data->category_id?>
+                Thể loại: <?php echo $data->category?>
             </p>
             <p class="book-content">
                 Giới thiệu: <?php echo $data->content?>

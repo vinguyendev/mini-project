@@ -52,3 +52,86 @@ function confirmDelete() {
     let id = $(".btn-confirm").data('id');
     location.href = "/book/delete/"+id;
 }
+
+function validateNameBook(name) {
+    let check = true;
+    let illegalChars = /\s\s/;
+    let text = '';
+    if (!name.length>0) {
+        check = false;
+        text = "Tên sách không được bỏ trống";
+    }
+    if (name.length !== name.trim().length) {
+        check = false;
+        text = "Tên sách không đúng định dạng";
+    }
+    if (illegalChars.test(name)) {
+        check = false;
+        text = "Tên sách không đúng định dạng";
+    }
+    $('#book-name').html(text);
+    return check;
+}
+
+function validateAuthorBook(author) {
+    let check = true;
+    let illegalChars = /\s\s/;
+    let text = '';
+    if (!author.length>0) {
+        check = false;
+        text = "Tên tác giả không được bỏ trống";
+    }
+    if (author.length !== author.trim().length) {
+        check = false;
+        text = "Tên tác giả không đúng định dạng";
+    }
+    if (illegalChars.test(author)) {
+        check = false;
+        text = "Tên tác giả không đúng định dạng";
+    }
+    $('#book-author').html(text);
+    return check;
+}
+
+function validateContentBook(content) {
+    let check = true;
+    let text = '';
+    if (!content.length>0) {
+        check = false;
+        text = "Tên tác giả không được bỏ trống";
+    }
+    if (content.length !== content.trim().length) {
+        check = false;
+        text = "Tên tác giả không đúng định dạng";
+    }
+    $('#book-content').html(text);
+    return check;
+}
+
+function validateCategoryBook(category) {
+    let check = true;
+    let text = "";
+    if (category <=0 ) {
+        check = false
+        text = "Vui lòng chọn thể loại"
+    }
+    $('#book-category').html(text);
+    return check;
+}
+
+function validateImageBook(image) {
+    let check = true;
+    let text = "";
+    if (!image) {
+        check = false;
+        text = "Vui lòng upload ảnh";
+    }
+    $("#book-image").html(text);
+    return check;
+}
+
+function onChangeImage() {
+    $('.name-image').css("display","none");
+    $(".image-input").css("width","auto");
+    console.log('123');
+}

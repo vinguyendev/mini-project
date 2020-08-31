@@ -7,6 +7,26 @@
 <?php
 include 'app/views/layout/header.php';
 include 'app/views/layout/nav-menu.php';
+
+$books = !empty($data['books'])?$data['books']:"";
+$error = !empty($data['error'])?$data['error']:'';
+$success = !empty($data['success'])?$data['success']:"";
+$categories = !empty($data['categories'])?$data['categories']:[];
+$text_success = "";
+switch ($success) {
+    case "delete":
+        $text_success = "Xóa sách thành công";
+        break;
+    case "create":
+        $text_success = "Thêm sách mới thành công";
+        break;
+    case "update":
+        $text_success = "Cập nhật sách thành công";
+        break;
+    default:
+        break;
+}
+
 ?>
 
 <div class="container">
@@ -17,6 +37,16 @@ include 'app/views/layout/nav-menu.php';
                 Thêm sách mới
             </button>
         </a>
+        <br>
+        <?php
+        if (!empty($success)) {
+            ?>
+            <span class="alert-success"><?php echo $text_success ?></span>
+            <br>
+            <?php
+        }
+        ?>
+        <br>
         <table class="table table-striped table-book">
             <thead>
             <tr>
@@ -31,7 +61,7 @@ include 'app/views/layout/nav-menu.php';
             <tbody>
             <?php
 
-            foreach ($data as $index => $book) {
+            foreach ($books as $index => $book) {
                 ?>
 
                 <tr>
@@ -45,7 +75,7 @@ include 'app/views/layout/nav-menu.php';
                         <img src="public/images/<?php echo $book->image?>" alt="">
                     </td>
                     <td><?php echo $book->author?></td>
-                    <td>Ngôn tình</td>
+                    <td><?php echo $categories[$book->category_id]?></td>
                     <td style="text-align: center">
                         <a href="/book/show/<?php echo $book->id?>">
                             <button type="button" class="btn btn-outline-info btn-action">
@@ -69,6 +99,7 @@ include 'app/views/layout/nav-menu.php';
             ?>
             </tbody>
         </table>
+        <br><br><br>
     </div>
 </div>
 <div class="container">

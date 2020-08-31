@@ -12,6 +12,32 @@ include 'app/views/layout/nav-menu.php';
 <?php
 
 $categories = $data['categories'];
+$text_error = "";
+$error = !empty($data['error'])?$data['error']:'';
+switch ($error){
+    case "name":
+        $text_error = "Tên không đúng định dạng";
+        break;
+    case "author":
+        $text_error = "Tên tác giả không đúng định dạng";
+        break;
+    case "content":
+        $text_error = "Giới thiệu sách không được để trống";
+        break;
+    case "category":
+        $text_error = "Phải chọn thể loại";
+        break;
+    case "image":
+        $text_error = "Bạn chưa upload ảnh";
+        break;
+    case "fail":
+        $text_error = "Thêm sách thất bại";
+        break;
+    default:
+        break;
+}
+
+$success = !empty($data['success'])?$data['success']:"";
 
 ?>
 
@@ -24,6 +50,23 @@ $categories = $data['categories'];
               enctype="multipart/form-data"
               onsubmit="return checkValidate()"
         >
+            <?php
+            if (!empty($text_error)) {
+                ?>
+                <span class="alert-warning">* <?php echo $text_error?></span>
+                <?php
+            }
+            ?>
+            <?php
+            if (!empty($success)) {
+                ?>
+                <span class="alert-success">Thêm sách thành công</span>
+                <?php
+            }
+            ?>
+            <br>
+            <br>
+
             <div class="form-group">
                 <label for="name">Tên sách</label>
                 <input type="text"
@@ -75,34 +118,41 @@ $categories = $data['categories'];
                 <span id="book-category" class="error"></span>
             </div>
 
-            <input type="file" name="image">
+            <input type="file" name="image" id="image" accept="image/*">
+            <span id="book-image" class="error"></span>
+            <br><br>
             <br><br>
             <div class="form-group contain-btn">
                 <button type="submit" class="btn btn-primary">Thêm mới</button>
             </div>
-            <br><br><br>
+            <br>
+            <a href="/book">
+                <button type="button" class="btn btn-primary btn-add">
+                    Quay lại trang chủ
+                </button>
+            </a>
+            <br><br>
         </form>
     </div>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="../public/js/app.js"></script>
+<script src="/public/js/app.js"></script>
 
 <script>
     function checkValidate() {
-
         let name = $("#name").val();
         let author = $("#author").val();
         let content = $("#content").val();
         let category = $("#category").val();
-        let check = true;
+        let image = $('#image').val();
 
-        if (name==='') {
-            check = false;
-            $('#book-name').html("Tên sách không được bỏ trống")
-        }
-
-        return check;
+        let checkName = validateNameBook(name);
+        let checkAuthor = validateAuthorBook(author);
+        let checkContent = validateContentBook(content);
+        let checkCategory = validateCategoryBook(category);
+        let checkImage = validateImageBook(image);
+        return checkName && checkAuthor && checkContent && checkCategory && checkImage;
     }
 </script>
 
