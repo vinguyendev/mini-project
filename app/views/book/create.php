@@ -74,7 +74,6 @@ $success = !empty($data['success'])?$data['success']:"";
                        id="name"
                        class="form-control"
                        placeholder="Nhập tên sách"
-                       value="Trí tuệ cộng tác"
                 >
                 <span id="book-name" class="error"></span>
             </div>
@@ -85,7 +84,6 @@ $success = !empty($data['success'])?$data['success']:"";
                        id="author"
                        class="form-control"
                        placeholder="Nhập tên tác giả"
-                       value="Dr. Rusly Abdullah PHD"
                 >
                 <span id="book-author" class="error"></span>
             </div>
@@ -96,7 +94,7 @@ $success = !empty($data['success'])?$data['success']:"";
                           class="form-control"
                           name="content"
                           placeholder="Nhập mô tả về sách"
-                >Trí tuệ cộng tác sẽ đưa bạn từ quá khứ đến với tương lai, đó là một con đường dài, cần có người chung vai giúp sức. Việc chúng ta khác nhau không có nghĩa là phải có một người trong chúng ta là người sai. Điều đó đơn giản là không chỉ có một cách để đúng</textarea>
+                ></textarea>
                 <span id="book-content" class="error"></span>
             </div>
 
